@@ -43,7 +43,9 @@ def open_json_file():
         for user_dict in user_json:
             uploaded_user_array.append(load_from_dict(user_dict))
 
-
+def dump_local_data():
+    with open("users.json", "w") as fp:
+        return
 
 
 def create_array_of_users():
