@@ -52,29 +52,28 @@ def create_array_of_users():
         dAddress = input("delevery address: ")
         customerType = input("customer type: ")
 
-        local_user_array.append({
+        new_user = {
             
             'fname': fname,
             'lname': lname,
             'address': address,
             'dAddress': dAddress,
             'customerType': customerType
-            })
-        
-        status = str(input('break? y/n: '))
-        if status == "y":
-            return local_user_array
-        break
+            }
+    
+        return new_user
 
 def print_users(local_array_of_users):
     for user in local_array_of_users:
         print(user)
 
 while True:
+    local_array_of_users = []
     choice = int(input("1 = create user , 2 = print dictonarys: "))
 
     if choice == 1:
-        local_array_of_users = create_array_of_users()
+        new_user = create_array_of_users()
+        local_array_of_users.append(new_user)
 
     elif choice == 2:
         print_users(local_array_of_users)
