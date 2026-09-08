@@ -32,16 +32,41 @@ class Users:
 def load_from_dict(user_dict:dict) -> dict:
     return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["dAddress"], user_dict["customerType"])
 
-
-with open("users.json", "r") as fp:
-    user_json = json.load(fp)
-    user_array = []
-    for user_dict in user_json:
-        user_array.append(load_from_dict(user_dict))
+def open_json_file():
+    with open("users.json", "r") as fp:
+        user_json = json.load(fp)
+        uploaded_user_array = []
+        for user_dict in user_json:
+            uploaded_user_array.append(load_from_dict(user_dict))
 
 
 
 
 
 def create_array_of_users():
+    local_user_array = []
+    while True:
+        fname = input("first name: ")
+        lname = input("last name: ")
+        address = input("address: ")
+        dAddress = input("delevery address: ")
+        customerType = input("customer type: ")
 
+        local_user_array.append({
+            
+            'fname': fname,
+            'lname': lname,
+            'address': address,
+            'dAddress': dAddress,
+            'customerType': customerType
+            })
+        
+        status = str(input('break? y/n: '))
+        if status == "y":
+            break
+
+
+
+while True:
+    create_array_of_users()
+    break
