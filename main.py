@@ -63,10 +63,18 @@ def create_array_of_users():
         
         status = str(input('break? y/n: '))
         if status == "y":
-            break
+            return local_user_array
+        break
 
-
+def print_users(local_array_of_users):
+    for user in local_array_of_users:
+        print(user)
 
 while True:
-    create_array_of_users()
-    break
+    choice = int(input("1 = create user , 2 = print dictonarys: "))
+
+    if choice == 1:
+        local_array_of_users = create_array_of_users()
+
+    elif choice == 2:
+        print_users(local_array_of_users)
