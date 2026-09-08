@@ -1,5 +1,9 @@
 import json
 
+
+local_array_of_users = []
+
+
 class User:
     def __init__(self, fname, lname, address, dAddress, customerType ):
         self.fname = fname
@@ -42,9 +46,7 @@ def open_json_file():
 
 
 
-
 def create_array_of_users():
-    local_user_array = []
     while True:
         fname = input("first name: ")
         lname = input("last name: ")
@@ -68,7 +70,7 @@ def print_users(local_array_of_users):
         print(user)
 
 while True:
-    local_array_of_users = []
+    
     choice = int(input("1 = create user , 2 = print dictonarys: "))
 
     if choice == 1:
