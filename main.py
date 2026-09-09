@@ -3,7 +3,6 @@ import json
 
 local_array_of_users = []
 
-
 class User:
     def __init__(self, fname, lname, address, dAddress, customerType ):
         self.fname = fname
@@ -21,8 +20,6 @@ class User:
             "customerType": self.customerType
         }
 
-
-
 class Users:
     def __init__(self, users: list):
         self.users = users
@@ -31,21 +28,25 @@ class Users:
         totals = []
         for user in self.users:
             totals.append(user.get_as_dict())
+        return totals
 
 
-def load_from_dict(user_dict:dict) -> dict:
+def load_from_dict(user_dict:dict) -> User:
     return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["dAddress"], user_dict["customerType"])
 
 def open_json_file():
     with open("users.json", "r") as fp:
         user_json = json.load(fp)
-        uploaded_user_array = []
-        for user_dict in user_json:
-            uploaded_user_array.append(load_from_dict(user_dict))
+    uploaded_user_array = []
+    for user_dict in user_json:
+        uploaded_user_array.append(load_from_dict(user_dict))
+    return uploaded_user_array
+
+local_array_of_users = open_json_file()
 
 def dump_local_data():
     with open("users.json", "w") as fp:
-        return
+       json.dump(Users(local_array_of_users).user_dict(), fp)
 
 
 def create_array_of_users():
@@ -56,28 +57,26 @@ def create_array_of_users():
         dAddress = input("delevery address: ")
         customerType = input("customer type: ")
 
-        new_user = {
-            
-            'fname': fname,
-            'lname': lname,
-            'address': address,
-            'dAddress': dAddress,
-            'customerType': customerType
-            }
+        new_user = User(
+            fname,
+            lname,
+            address,
+            dAddress,
+            customerType
+        )
     
         return new_user
 
-def print_users(local_array_of_users):
-    for user in local_array_of_users:
-        print(user)
-
 while True:
     
-    choice = int(input("1 = create user , 2 = print dictonarys: "))
+    choice = int(input("1 = create user , 2 = save data 3 = deleat user: "))
 
     if choice == 1:
         new_user = create_array_of_users()
         local_array_of_users.append(new_user)
 
     elif choice == 2:
-        print_users(local_array_of_users)
+        dump_local_data()
+
+    elif choice == 3:
+        
