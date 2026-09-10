@@ -46,7 +46,7 @@ local_array_of_users = open_json_file()
 
 def dump_local_data():
     with open("users.json", "w") as fp:
-       json.dump(Users(local_array_of_users).user_dict(), fp)
+       json.dump(Users(local_array_of_users).user_dict(), fp, indent=4)
 
 def remove_user(user_fname, user_lname):
     for User in local_array_of_users:
