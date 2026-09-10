@@ -30,6 +30,9 @@ class Users:
             totals.append(user.get_as_dict())
         return totals
 
+class Quotes:
+    def __init__(self, quoteNum, ):
+        pass
 
 def load_from_dict(user_dict:dict) -> User:
     return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["dAddress"], user_dict["customerType"])

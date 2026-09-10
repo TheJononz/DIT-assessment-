@@ -1,16 +1,1 @@
-[
-    {
-        "fname": "jonathan",
-        "lname": "myall",
-        "address": "223",
-        "dAddress": "223",
-        "customerType": "retail"
-    },
-    {
-        "fname": "mr",
-        "lname": "cool",
-        "address": "44",
-        "dAddress": "44",
-        "customerType": "yes"
-    }
-]
+[]
