@@ -48,11 +48,15 @@ def dump_local_data():
     with open("users.json", "w") as fp:
        json.dump(Users(local_array_of_users).user_dict(), fp)
 
-def remove_user(user):
+def remove_user(user_fname, user_lname):
     for User in local_array_of_users:
-        if User.fname == user:
+        if User.fname == user_fname and User.lname == user_lname:
             local_array_of_users.remove(User)
             break
+
+def diplay_all_users():
+    for User in local_array_of_users:
+        print(f"first name: {User.fname}, last name: {User.lname}, address: {User.address}, delivery address: {User.dAddress}, customer type: {User.customerType}")
 
 def create_array_of_users():
     while True:
@@ -74,7 +78,7 @@ def create_array_of_users():
 
 while True:
     
-    choice = int(input("1 = create user , 2 = save data 3 = deleat user: "))
+    choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users : "))
 
     if choice == 1:
         new_user = create_array_of_users()
@@ -84,5 +88,9 @@ while True:
         dump_local_data()
 
     elif choice == 3:
-        user_remove = input("what user to remove?: ")
-        remove_user(user_remove)
+        user_remove_fname = input("user first name: ")
+        user_remove_lname = input("user last name: ")
+        remove_user(user_remove_fname, user_remove_lname)
+    
+    elif choice == 4:
+        diplay_all_users()
