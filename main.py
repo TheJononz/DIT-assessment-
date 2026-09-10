@@ -48,6 +48,11 @@ def dump_local_data():
     with open("users.json", "w") as fp:
        json.dump(Users(local_array_of_users).user_dict(), fp)
 
+def remove_user(user):
+    for User in local_array_of_users:
+        if User.fname == user:
+            local_array_of_users.remove(User)
+            break
 
 def create_array_of_users():
     while True:
@@ -79,4 +84,5 @@ while True:
         dump_local_data()
 
     elif choice == 3:
-        
+        user_remove = input("what user to remove?: ")
+        remove_user(user_remove)
