@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "bathroom": {
+      "option A": {
+        "description": "tiles, spa bath, showers and tapware",
+        "price": 2500
+      }
+    },
+    "kitchen": {
+      "option A": {
+        "description": "",
+        "price": 2000
+      },
+      "option B": {
+        "description": "",
+        "price": 3500
+      },
+      "option C": {
+        "description": "",
+        "price": 6000
+      }
+    },
+    "living room": {
+      "option A": {
+        "description": "",
+        "price": 250
+      }
+    }
+  }
+]
