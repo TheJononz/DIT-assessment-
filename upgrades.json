@@ -24,7 +24,23 @@
       "option A": {
         "description": "",
         "price": 250
+      },
+      "option B": {
+        "description": "",
+        "price": 250
+      },
+      "option C": {
+        "description": "",
+        "price": 2500
       }
+    },
+    "bedrooms": {
+
     }
+
+
+
+      
+    
   }
 ]
