@@ -31,8 +31,31 @@ class Users:
         return totals
 
 class Quotes:
-    def __init__(self, quoteNum, ):
-        pass
+    def __init__(self, quoteNum, fname, lname, address, dAddress, customerType, discountRate, totalPriceExcGst, gst, totalPriceIncGst):
+        self.quoteNum = quoteNum
+        self.fname = fname
+        self.lname = lname
+        self.address = address
+        self.dAddress = dAddress
+        self.customerType = customerType
+        self.discountRate = discountRate
+        self.totalPriceExcGst = totalPriceExcGst
+        self.gst = gst
+        self.totalPriceIncGst = totalPriceIncGst
+
+        def get_as_dict(self) -> dict:
+            return{
+                "quoteNum": self.quoteNum,
+                "fname": self.fname,
+                "lname": self.lname,
+                "address": self.address,
+                "dAddress": self.dAddress,
+                "customerType": self.customerType,
+                "discountRate": self.discountRate,
+                "toatlPriceExcGst": self.totalPriceExcGst,
+                "gst": self.gst,
+                "totalPriceIncGst": self.totalPriceIncGst
+            }
 
 def load_from_dict(user_dict:dict) -> User:
     return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["dAddress"], user_dict["customerType"])
