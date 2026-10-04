@@ -4,11 +4,10 @@ import json
 local_array_of_users = []
 
 class User:
-    def __init__(self, fname, lname, address, dAddress, customerType ):
+    def __init__(self, fname, lname, address, customerType ):
         self.fname = fname
         self.lname = lname
         self.address = address
-        self.dAddress = dAddress
         self.customerType = customerType
 
     def get_as_dict(self) -> dict:
@@ -16,7 +15,6 @@ class User:
             "fname": self.fname,
             "lname": self.lname,
             "address": self.address,
-            "dAddress": self.dAddress,
             "customerType": self.customerType
         }
 
@@ -58,7 +56,7 @@ class Quotes:
             }
 
 def load_from_dict(user_dict:dict) -> User:
-    return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["dAddress"], user_dict["customerType"])
+    return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["customerType"])
 
 def open_json_file():
     with open("users.json", "r") as fp:
@@ -82,29 +80,60 @@ def remove_user(user_fname, user_lname):
 
 def diplay_all_users():
     for User in local_array_of_users:
-        print(f"first name: {User.fname}, last name: {User.lname}, address: {User.address}, delivery address: {User.dAddress}, customer type: {User.customerType}")
+        print(f"first name: {User.fname}, last name: {User.lname}, address: {User.address}, customer type: {User.customerType}")
 
 def create_array_of_users():
     while True:
         fname = input("first name: ")
         lname = input("last name: ")
         address = input("address: ")
-        dAddress = input("delevery address: ")
         customerType = input("customer type: ")
 
         new_user = User(
             fname,
             lname,
             address,
-            dAddress,
             customerType
         )
     
         return new_user
 
+def create_array_of_quotes():
+    while True:
+        print("ALL USERS:")
+        for User in local_array_of_users:
+            print(f" USER : first name: {User.fname}, last name: {User.lname}")  
+        print("choose user")
+
+        while True:
+            fname = input("first name: ")
+            selectedUser = None
+            for user in local_array_of_users:
+                if fname == user.fname:
+                    selectedUser = user
+
+            if selectedUser:
+                lname = selectedUser.lname
+                address = selectedUser.address
+                customerType = selectedUser.customerType
+                break
+            else:
+                print("not a valid user")
+              
+        dAddress = input("delivery address: ")
+
+                
+
+
+
+
+
+
+
+    
 while True:
     
-    choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users : "))
+    choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote  "))
 
     if choice == 1:
         new_user = create_array_of_users()
@@ -120,3 +149,6 @@ while True:
     
     elif choice == 4:
         diplay_all_users()
+
+    elif choice == 5:
+        create_array_of_quotes()
