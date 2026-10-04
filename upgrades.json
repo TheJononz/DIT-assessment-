@@ -2,48 +2,53 @@
   {
     "bathroom": {
       "option A": {
-        "description": "tiles, spa bath, showers and tapware",
+        "description": "Tiles, spa bath, showers and tapware",
         "price": 2500
       }
     },
     "kitchen": {
       "option A": {
-        "description": "",
+        "description": "Upgrades units and worktop",
         "price": 2000
       },
       "option B": {
-        "description": "",
+        "description": "As A plus induction hob",
         "price": 3500
       },
       "option C": {
-        "description": "",
+        "description": "As A plus Deluxe appliance pack",
         "price": 6000
       }
     },
     "living room": {
       "option A": {
-        "description": "",
+        "description": "TV point plus roof mounted aerial",
         "price": 250
       },
       "option B": {
-        "description": "",
+        "description": "TV point plus satellite dish",
         "price": 250
       },
       "option C": {
-        "description": "",
+        "description": "4.5 KW Heat pump",
         "price": 2500
       }
     },
     "bedrooms": {
       "option A":{
-        "description": "",
+        "description": "2.5 KW Heat pump",
         "price": 1800
       }
+    },
+    "miscellaneous": {
+      "option A":{
+        "description": "Additional electrical sockets (1G)",
+        "price": 40
+      },
+      "option B": {
+        "description": "Network points",
+        "price" : 50
+      }
     }
-
-
-
-      
-    
   }
 ]
