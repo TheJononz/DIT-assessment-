@@ -1,6 +1,8 @@
+
+#my librarys that i imported
 import json
 from datetime import datetime
-
+#where I store my local list of users as objects
 local_array_of_users = []
 
 #constants
@@ -23,9 +25,9 @@ MIN_NETWORK_ROOMS = 2
 
 
 
+# in this code i make heay use of objetcs, where if i can have a peice of information as an object i do
 
-
-
+#object for all my options
 class Option:
     def __init__(self, name, price):
         self.name = name 
@@ -39,7 +41,7 @@ class Option:
             "name": self.name,
             "price": self.price
         }
-
+#object for the sockets. this is usefull to keep track between 1G and 2G, also creating the price ect
 class Socket:
     def __init__(self, socketType, quantity):
         self.socketType = socketType
@@ -60,7 +62,7 @@ class Socket:
             "price": self.price,
             "total": self.get_total()
         }
-
+#esentaly the same as hte sockets, but for the network
 class Networkpoints:
     def __init__(self, quantity):
         self.quantity = quantity
@@ -75,7 +77,7 @@ class Networkpoints:
             "price": self.price,
             "total": self.get_total()
         }
-
+#same consept
 class NetworkSwitch:
     def __init__(self):
         self.name = "8-port 10/100/1000 Network Switch"
@@ -89,7 +91,8 @@ class NetworkSwitch:
             "name": self.name,
             "price": self.price
         }
-
+#this object us for the room, where each individual room has its distinct options and socket types, so the user can be asked abut things on a room by room baisis
+#like the spesifications say
 class Room:
     def __init__(self, name):
         self.name = name
@@ -147,6 +150,7 @@ class Room:
             "total": self.get_total()
         }
 
+#this is an amalgamation of all the room objects into the tinyhome so that total prices can be worked out, as well as the number of sockets and switches 
 class Tinyhome:
     def __init__(self):
         self.base_price_inc_gst = BASE_PRICE_INC_GST
@@ -193,6 +197,10 @@ class Tinyhome:
             total += self.network_switch.get_total()
         return total   
 
+#this object oid for the users. the way that my users work is they are stored localy as an array of objects, and i can convert this into an array of dictonarys,
+#and then this can be saved to a json file. when the program restarts it automaticly pulles all the data from that json file and then it gets converted into the local
+#storage. when a user is added or removed they are added or removed to this local storage (called local_array_of_users) and then when that is saved it overrites the json
+#file. this is how I manage my users
 class User:
     def __init__(self, fname, lname, address, customerType, phone, email):
         self.fname = fname
@@ -222,6 +230,8 @@ class Users:
             totals.append(user.get_as_dict())
         return totals
 
+
+# an objetc for when i create the quote. this is where the calculations for the discounds and stuff happen.
 class Quotes:
     def __init__(self, quoteNum, quoteDate, user, dAddress):
         self.quoteNum = quoteNum
