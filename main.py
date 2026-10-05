@@ -82,7 +82,65 @@ class NetworkSwitch:
             "name": self.name,
             "price": self.price
         }
+
+class Room:
+    def __init__(self, name):
+        self.name = name
+        self.options = []
+        self.sockets = []
+        self.network_points = None
+
+    def add_option(self, option):
+        self.options.append(option)
+
+    def add_sockets(self, sockets):
+        self.sockets.append(sockets)
+
+    def add_networkPoints(self, networkPoints):
+        self.network_points = networkPoints
+
+    def get_socket_total(self):
+        total = 0
+        for sockets in self.sockets:
+            total += sockets.quantity
+        return total
+
+    def get_network_points_total(self):
+        if self.network_points is None:
+            return 0
+        return self.network_points.quantity
+
+    def get_total(self):
+        total = 0
+
+        for option in self.options:
+            total += option.get_total()
+        for socket in self.sockets:
+            total += socket.get_total()
+        if self.network_points is not None:
+            total += self.network_points.get_total()
+
+        return total
     
+    def get_as_dict(self):
+        return {
+            "name": self.name,
+            "options": [
+                option.get_as_dict()
+                for option in self.options
+            ],
+            "sockets": [
+                socket.get_as_dict()
+                for socket in self.sockets
+            ],
+            "network_points":
+                self.network_points.get_as_dict()
+                if self.network_points is not None
+                else None,
+            "total": self.get_total()
+        }
+
+
 class User:
     def __init__(self, fname, lname, address, customerType ):
         self.fname = fname
