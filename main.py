@@ -19,6 +19,13 @@ MAX_NETWORK_POINTS = 8
 MIN_NETWORK_ROOMS = 2
 
 
+
+
+
+
+
+
+
 class Option:
     def __init__(self, name, price):
         self.name = name 
@@ -140,6 +147,51 @@ class Room:
             "total": self.get_total()
         }
 
+class Tinyhome:
+    def __init__(self):
+        self.basePriceIncGst = BASE_PRICE_INC_GST
+        self.rooms = [
+            Room("bathroom"),
+            Room("kitchen"),
+            Room("Living Room"),
+            Room("Bedroom 1"),
+            Room("bedroom 2")
+        ]
+
+        self.network_switch = None
+
+    def get_room(self, room_name):
+        for room in self.rooms:
+            if room.name == room_name:
+                return room
+        return None
+
+    def get_total_sockets(self):
+        total = 0
+        for room in self.rooms:
+            total += room.get_socket_total()
+        return total
+
+    def get_total_network_points(self):
+        total = 0
+        for room in self.rooms:
+            total += room.get_network_point_total()
+        return total
+
+    def get_network_room_count(self):
+        total = 0
+        for room in self.rooms:
+            if room.get_network_point_total() > 0:
+                total += 1
+        return total
+
+    def get_options_total(self):
+        total = 0
+        for room in self.rooms:
+            total += room.get_total()
+        if self.network_switch is not None:
+            total += self.network_switch.get_total()
+        return total   
 
 class User:
     def __init__(self, fname, lname, address, customerType ):
@@ -195,6 +247,16 @@ class Quotes:
                 "gst": self.gst,
                 "totalPriceIncGst": self.totalPriceIncGst
             }
+
+
+
+
+
+
+
+
+
+
 
 def load_from_dict(user_dict:dict) -> User:
     return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["customerType"])
