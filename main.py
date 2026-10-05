@@ -3,6 +3,21 @@ import json
 
 local_array_of_users = []
 
+#constants
+BASE_PRICE_INC_GST = 75000
+GST_RATE = 0.15
+TRADE_DISCOUNT = 0.10
+
+ONE_G_SOCKET_PRICE = 40
+TWO_G_SOCKET_PRICE = 50
+NETWORK_POINT_PRICE = 50
+NETWORK_SWITCH_PRICE = 100
+
+MAX_SOCKETS_TOTAL = 12
+MAX_SOCKETS_PER_ROOM = 4
+MAX_NETWORK_POINTS = 8
+MIN_NETWORK_ROOMS = 2
+
 
 class Option:
     def __init__(self, name, price):
