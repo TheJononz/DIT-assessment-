@@ -194,18 +194,22 @@ class Tinyhome:
         return total   
 
 class User:
-    def __init__(self, fname, lname, address, customerType ):
+    def __init__(self, fname, lname, address, customerType, phone, email):
         self.fname = fname
         self.lname = lname
         self.address = address
         self.customerType = customerType
+        self.phone = phone
+        self.email = email
 
     def get_as_dict(self) -> dict:
         return {
             "fname": self.fname,
             "lname": self.lname,
             "address": self.address,
-            "customerType": self.customerType
+            "customerType": self.customerType,
+            "phone": self.phone,
+            "email": self.email
         }
 
 class Users:
@@ -219,34 +223,56 @@ class Users:
         return totals
 
 class Quotes:
-    def __init__(self, quoteNum, fname, lname, address, dAddress, customerType, discountRate, rooms, totalPriceExcGst, gst, totalPriceIncGst):
-
+    def __init__(self, quoteNum, quotedate, user, dAddress):
         self.quoteNum = quoteNum
-        self.fname = fname
-        self.lname = lname
-        self.address = address
+        self.quotedate = quotedate
+        self.user = user
         self.dAddress = dAddress
-        self.customerType = customerType
-        self.discountRate = discountRate
-        self.rooms = rooms
-        self.totalPriceExcGst = totalPriceExcGst
-        self.gst = gst
-        self.totalPriceIncGst = totalPriceIncGst
+        self.home = Tinyhome()
+        self.discountrate = 0
+        self.discountValue = 0
+        self.totalPriceExcGst = 0
+        self.gst = 0
+        self.totalPriceIncGst = 0
 
-    def get_as_dict(self) -> dict:
-        return{
-                "quoteNum": self.quoteNum,
-                "fname": self.fname,
-                "lname": self.lname,
-                "address": self.address,
-                "dAddress": self.dAddress,
-                "customerType": self.customerType,
-                "discountRate": self.discountRate,
-                "rooms": self.rooms,
-                "toatlPriceExcGst": self.totalPriceExcGst,
-                "gst": self.gst,
-                "totalPriceIncGst": self.totalPriceIncGst
+    def calculate_total(self):
+        base_price_exc_gst = (
+            self.home.base_price_inc_gst / (1 + GST_RATE)
+        )
+        options_total = self.home.get_options_total()
+        subtotal = base_price_exc_gst + options_total
+        if self.user.customerType.lower() == "trade":
+            self.discountRate = TRADE_DISCOUNT
+        else:
+            self.discountRate = 0
+        self.discountValue = subtotal * self.discountRate
+        self.totalPriceExcGst = subtotal - self.discountValue
+        self.gst = self.totalPriceExcGst * GST_RATE
+        self.totalPriceIncGst = (
+            self.totalPriceExcGst + self.gst
+        )
+
+    def get_as_dict(self):
+        return {
+            "quoteNum": self.quoteNum,
+            "quoteDate": self.quoteDate,
+            "fname": self.user.fname,
+            "lname": self.user.lname,
+            "address": self.user.address,
+            "deliveryAddress": self.deliveryAddress,
+            "customerType": self.user.customerType,
+            "discountRate": self.discountRate,
+            "discountValue": self.discountValue,
+            "totalPriceExcGst": self.totalPriceExcGst,
+            "gst": self.gst,
+            "totalPriceIncGst": self.totalPriceIncGst,
+            "home": {
+                "rooms": [
+                    room.get_as_dict()
+                    for room in self.home.rooms
+                ]
             }
+        }
 
 
 
@@ -259,7 +285,7 @@ class Quotes:
 
 
 def load_from_dict(user_dict:dict) -> User:
-    return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["customerType"])
+    return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["customerType"], user_dict["phone"], user_dict["email"])
 
 def open_json_file():
     with open("users.json", "r") as fp:
@@ -283,7 +309,7 @@ def remove_user(user_fname, user_lname):
 
 def diplay_all_users():
     for User in local_array_of_users:
-        print(f"first name: {User.fname}, last name: {User.lname}, address: {User.address}, customer type: {User.customerType}")
+        print(f"first name: {User.fname}, last name: {User.lname}, address: {User.address}, customer type: {User.customerType}, phone: {User.phone}, email: {User.email}")
 
 def create_array_of_users():
     while True:
@@ -291,12 +317,16 @@ def create_array_of_users():
         lname = input("last name: ")
         address = input("address: ")
         customerType = input("customer type: ")
+        phone = input ("customer phonenumber: ")
+        email = input ("customer email: ")
 
         new_user = User(
             fname,
             lname,
             address,
-            customerType
+            customerType,
+            phone,
+            email
         )
     
         return new_user
