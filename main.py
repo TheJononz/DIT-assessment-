@@ -262,41 +262,16 @@ class Quotes:
             self.totalPriceExcGst + self.gst
         )
 
-    def get_as_dict(self):
-        return {
-            "quoteNum": self.quoteNum,
-            "quoteDate": self.quoteDate,
-            "fname": self.user.fname,
-            "lname": self.user.lname,
-            "address": self.user.address,
-            "dAddress": self.deliveryAddress,
-            "customerType": self.user.customerType,
-            "discountRate": self.discountRate,
-            "discountValue": self.discountValue,
-            "totalPriceExcGst": self.totalPriceExcGst,
-            "gst": self.gst,
-            "totalPriceIncGst": self.totalPriceIncGst,
-            "home": {
-                "rooms": [
-                    room.get_as_dict()
-                    for room in self.home.rooms
-                ]
-            }
-        }
 
 
 
 
 
-
-
-
-
-
-
+#creates a user ibject from a dictonary
 def load_from_dict(user_dict:dict) -> User:
     return User(user_dict["fname"], user_dict["lname"], user_dict["address"], user_dict["customerType"], user_dict["phone"], user_dict["email"])
 
+#opens the json file and takes that data, turns it into objects and chucks it into local storage
 def open_json_file():
     with open("users.json", "r") as fp:
         user_json = json.load(fp)
@@ -307,26 +282,30 @@ def open_json_file():
 
 local_array_of_users = open_json_file()
 
+#saves users by taking the array of objects, converst it into dictonary and writes it to json
 def dump_local_data():
     with open("users.json", "w") as fp:
        json.dump(Users(local_array_of_users).user_dict(), fp, indent=4)
 
-def remove_user(user_fname, user_lname):
-    for User in local_array_of_users:
-        if User.fname == user_fname and User.lname == user_lname:
-            local_array_of_users.remove(User)
-            break
+#finds spesific user adn then removes them
+def remove_user():
+    User = select_user()
+    local_array_of_users.remove(User)
 
+
+#loops through array o users and displays them 
 def diplay_all_users():
     for User in local_array_of_users:
         print(f"first name: {User.fname}, last name: {User.lname}, address: {User.address}, customer type: {User.customerType}, phone: {User.phone}, email: {User.email}")
 
+# this function is for allowing the user to cancel at any time by taking advantage of raise Exception 
 def get_input(message):
     value = input(message)
     if value.lower() == "c":
         raise Exception("CANCEL")
     return value
 
+# creates a user
 def create_user():
     try:
         print("Type C at any time to cancel.")
@@ -364,6 +343,7 @@ def create_user():
             return None
         raise
 
+#is able to select a user baised off of there index number in there position in the array of users
 def select_user():
     if len(local_array_of_users) == 0:
         print("there are no users")
@@ -724,9 +704,7 @@ while True:
         dump_local_data()
 
     elif choice == 3:
-        user_remove_fname = input("user first name: ")
-        user_remove_lname = input("user last name: ")
-        remove_user(user_remove_fname, user_remove_lname)
+        remove_user()
     
     elif choice == 4:
         diplay_all_users()
