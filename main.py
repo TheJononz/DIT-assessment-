@@ -223,9 +223,9 @@ class Users:
         return totals
 
 class Quotes:
-    def __init__(self, quoteNum, quotedate, user, dAddress):
+    def __init__(self, quoteNum, quoteDate, user, dAddress):
         self.quoteNum = quoteNum
-        self.quotedate = quotedate
+        self.quoteDate = quoteDate
         self.user = user
         self.dAddress = dAddress
         self.home = Tinyhome()
@@ -572,9 +572,7 @@ def choose_network_points(room, home):
 def create_quote():
 
     try:
-        print("\n========================")
         print("CREATE NEW QUOTE")
-        print("========================")
         print("Type C at any point to cancel.\n")
 
         user = select_user()
@@ -637,36 +635,69 @@ def create_quote():
             return None
         raise
 
-"""
-def create_array_of_quotes():
-    while True:
-        print("ALL USERS:")
-        for User in local_array_of_users:
-            print(f" USER : first name: {User.fname}, last name: {User.lname}")  
-        print("choose user")
-
-        while True:
-            fname = input("first name: ")
-            selectedUser = None
-            for user in local_array_of_users:
-                if fname == user.fname:
-                    selectedUser = user
-
-            if selectedUser:
-                lname = selectedUser.lname
-                address = selectedUser.address
-                customerType = selectedUser.customerType
-                break
-            else:
-                print("not a valid user")
-              
-        dAddress = input("delivery address: ")
-"""
                 
+def save_quote(quote):
+
+    with open("QuoteHistory.txt", "a") as file:
 
 
+        file.write("WAIMAK BUILD CO LTD")
+        file.write("Unit 3, 93 McKenzie Street")
+        file.write("Rangiora, North Canterbury")
+        file.write("Tel: 03 1234567")
+        file.write("Email: Office@wbc.co.nz\n")
+        file.write(f"\nQuote Number: {quote.quoteNum}")
+        file.write(f"Quote Date: {quote.quoteDate}")
+        file.write(f"Customer: {quote.user.fname} {quote.user.lname}")
+        file.write(f"Customer Address: {quote.user.address}")
+        file.write(f"Delivery Address: {quote.dAddress}")
+        file.write(f"Customer Type: {quote.user.customerType}")
+        file.write("\nROOMS\n")
+
+        for room in quote.home.rooms:
+            file.write(f"{room.name}")
+
+            for option in room.options:
+                file.write(f"  {option.name}: ${option.price:,.2f}")
+
+            for socket in room.sockets:
+                file.write(f"  {socket.quantity} x {socket.socketType} sockets: ${socket.get_total():,.2f}\n")
+
+            if room.network_points is not None:
+                file.write(f"  {room.network_points.quantity} network points: ${room.network_points.get_total():,.2f}")
+
+            file.write(f"  Room total: ${room.get_total():,.2f}")
+
+        if quote.home.network_switch is not None:
+            file.write(f"Network switch: ${quote.home.network_switch.price:,.2f}")
+
+        file.write(f"\nDiscount rate: {quote.discountRate * 100:.0f}%")
+        file.write(f"Discount value: -${quote.discountValue:,.2f}")
+        file.write(f"Total excluding GST: ${quote.totalPriceExcGst:,.2f}")
+        file.write(f"GST: ${quote.gst:,.2f}")
+        file.write(f"Total including GST: ${quote.totalPriceIncGst:,.2f}")
 
 
+    print("\nQuote saved to QuoteHistory.txt.")
+
+
+def quote_finished_menu(quote):
+
+    while True:
+        print("1 = Save quote")
+        print("2 = Do not save")
+
+        choice = input("Choose: ")
+        if choice == "1":
+            save_quote(quote)
+            return
+        elif choice == "2":
+
+            print("Quote was not saved.")
+            return
+        else:
+
+            print("Invalid choice.")
 
 
 
@@ -691,4 +722,5 @@ while True:
         diplay_all_users()
 
     elif choice == 5:
-        create_quote()
+        quote = create_quote()
+        quote_finished_menu(quote)

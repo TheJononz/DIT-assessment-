@@ -1,13 +1,5 @@
 [
     {
-        "fname": "lukan",
-        "lname": "snopovs",
-        "address": "222",
-        "customerType": "yes",
-        "phone": "1234567890",
-        "email": "somewhere@someplace"
-    },
-    {
         "fname": "jonathan",
         "lname": "myall",
         "address": "22344",
