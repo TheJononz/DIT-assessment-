@@ -311,14 +311,31 @@ def diplay_all_users():
     for User in local_array_of_users:
         print(f"first name: {User.fname}, last name: {User.lname}, address: {User.address}, customer type: {User.customerType}, phone: {User.phone}, email: {User.email}")
 
-def create_array_of_users():
-    while True:
-        fname = input("first name: ")
-        lname = input("last name: ")
-        address = input("address: ")
-        customerType = input("customer type: ")
-        phone = input ("customer phonenumber: ")
-        email = input ("customer email: ")
+def get_input(message):
+    value = input(message)
+    if value.lower() == "c":
+        raise Exception("CANCEL")
+    return value
+
+def create_user():
+    try:
+        print("\nType C at any time to cancel.\n")
+
+        fname = get_input("First name: ")
+        lname = get_input("Last name: ")
+        address = get_input("Address: ")
+        customerType = get_input("Customer type (Trade/Retail): ")
+        customerType = customerType.capitalize()
+
+        while customerType not in ["Trade", "Retail"]:
+            print("Please enter Trade or Retail.")
+            customerType = get_input(
+                "Customer type (Trade/Retail): "
+            )
+            customerType = customerType.capitalize()
+
+        phone = get_input("Phone number: ")
+        email = get_input("Email: ")
 
         new_user = User(
             fname,
@@ -328,8 +345,14 @@ def create_array_of_users():
             phone,
             email
         )
-    
+
         return new_user
+
+    except Exception as error:
+        if str(error) == "CANCEL":
+            print("User creation cancelled.")
+            return None
+        raise
 
 
 """
@@ -371,7 +394,7 @@ while True:
     choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote  "))
 
     if choice == 1:
-        new_user = create_array_of_users()
+        new_user = create_user()
         local_array_of_users.append(new_user)
 
     elif choice == 2:
