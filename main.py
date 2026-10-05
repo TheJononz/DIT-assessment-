@@ -100,8 +100,8 @@ class Room:
     def add_option(self, option):
         self.options.append(option)
 
-    def add_sockets(self, sockets):
-        self.sockets.append(sockets)
+    def add_sockets(self, socket):
+        self.sockets.append(socket)
 
     def add_networkPoints(self, networkPoints):
         self.network_points = networkPoints
@@ -151,11 +151,11 @@ class Tinyhome:
     def __init__(self):
         self.basePriceIncGst = BASE_PRICE_INC_GST
         self.rooms = [
-            Room("bathroom"),
-            Room("kitchen"),
+            Room("Bathroom"),
+            Room("Kitchen"),
             Room("Living Room"),
             Room("Bedroom 1"),
-            Room("bedroom 2")
+            Room("Bedroom 2")
         ]
 
         self.network_switch = None
@@ -175,13 +175,13 @@ class Tinyhome:
     def get_total_network_points(self):
         total = 0
         for room in self.rooms:
-            total += room.get_network_point_total()
+            total += room.get_network_points_total()
         return total
-
+    
     def get_network_room_count(self):
         total = 0
         for room in self.rooms:
-            if room.get_network_point_total() > 0:
+            if room.get_network_points_total() > 0:
                 total += 1
         return total
 
@@ -229,7 +229,7 @@ class Quotes:
         self.user = user
         self.dAddress = dAddress
         self.home = Tinyhome()
-        self.discountrate = 0
+        self.discountRate = 0
         self.discountValue = 0
         self.totalPriceExcGst = 0
         self.gst = 0
@@ -259,7 +259,7 @@ class Quotes:
             "fname": self.user.fname,
             "lname": self.user.lname,
             "address": self.user.address,
-            "deliveryAddress": self.deliveryAddress,
+            "dAddress": self.deliveryAddress,
             "customerType": self.user.customerType,
             "discountRate": self.discountRate,
             "discountValue": self.discountValue,
@@ -388,10 +388,7 @@ def choose_bathroom_options(room):
 
     if choice == "1":
         room.add_option(
-            Option(
-                "Tiles, spa bath, shower and tapware",
-                2500
-            )
+            Option("Tiles, spa bath, shower and tapware",2500)
         )
 
     elif choice != "2":
@@ -571,7 +568,75 @@ def choose_network_points(room, home):
 
     room.add_network_points(network_points)
 
-    
+
+def create_quote():
+
+    try:
+        print("\n========================")
+        print("CREATE NEW QUOTE")
+        print("========================")
+        print("Type C at any point to cancel.\n")
+
+        user = select_user()
+        if user is None:
+            return None
+
+        deliveryAddress = get_input("Delivery address: ")
+
+        quoteNum = (
+            user.fname[:2]+ user.lname[:2]+ datetime.now().strftime("%d%m%Y%H%M%S")).upper()
+        quoteDate = datetime.now().strftime("%d/%m/%Y %H:%M")
+
+        quote = Quotes(
+            quoteNum,
+            quoteDate,
+            user,
+            deliveryAddress
+        )
+        home = quote.home
+        #options for bathroom
+        choose_bathroom_options(home.get_room("Bathroom"))
+        choose_sockets(home.get_room("Bathroom"),home)
+        choose_network_points(home.get_room("Bathroom"),home)
+
+        #options for kitchen
+        choose_kitchen_options(home.get_room("Kitchen"))
+        choose_sockets(home.get_room("Kitchen"),home)
+        choose_network_points(home.get_room("Kitchen"),home)
+
+        #options for living room
+        choose_living_options(home.get_room("Living Room"))
+        choose_sockets(home.get_room("Living Room"),home)
+        choose_network_points(home.get_room("Living Room"),home)
+
+        #options for bedroom one
+        choose_bedroom_options(home.get_room("Bedroom 1"))
+        choose_sockets(home.get_room("Bedroom 1"),home)
+        choose_network_points(home.get_room("Bedroom 1"),home)
+
+        #options for bedroom two
+        choose_bedroom_options(home.get_room("Bedroom 2"))
+        choose_sockets(home.get_room("Bedroom 2"),home)
+        choose_network_points(home.get_room("Bedroom 2"),home)
+
+        #completing network requirements 
+        network_rooms = home.get_network_room_count()
+        if home.get_total_network_points() > 0:
+            if network_rooms < MIN_NETWORK_ROOMS:
+                print("You need network points in at least 2 different rooms.")
+                print("The quote has been cancelled.")
+                return None
+
+            home.network_switch = NetworkSwitch()
+        quote.calculate_total()
+        return quote
+
+    except Exception as error:
+        if str(error) == "CANCEL":
+            print("\nQuote cancelled.")
+            return None
+        raise
+
 """
 def create_array_of_quotes():
     while True:
@@ -626,4 +691,4 @@ while True:
         diplay_all_users()
 
     elif choice == 5:
-        create_array_of_quotes()
+        create_quote()
