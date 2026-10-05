@@ -48,13 +48,13 @@ class Socket:
 
     def get_as_dict(self):
         return {
-            "type": self.socket_type,
+            "type": self.socketType,
             "quantity": self.quantity,
             "price": self.price,
             "total": self.get_total()
         }
 
-class Network_points:
+class Networkpoints:
     def __init__(self, quantity):
         self.quantity = quantity
         self.price = NETWORK_POINT_PRICE
@@ -69,7 +69,19 @@ class Network_points:
             "total": self.get_total()
         }
 
-        
+class NetworkSwitch:
+    def __init__(self):
+        self.name = "8-port 10/100/1000 Network Switch"
+        self.price = NETWORK_SWITCH_PRICE
+
+    def get_total(self):
+        return self.price
+
+    def get_as_dict(self):
+        return {
+            "name": self.name,
+            "price": self.price
+        }
     
 class User:
     def __init__(self, fname, lname, address, customerType ):
@@ -111,8 +123,8 @@ class Quotes:
         self.gst = gst
         self.totalPriceIncGst = totalPriceIncGst
 
-        def get_as_dict(self) -> dict:
-            return{
+    def get_as_dict(self) -> dict:
+        return{
                 "quoteNum": self.quoteNum,
                 "fname": self.fname,
                 "lname": self.lname,
