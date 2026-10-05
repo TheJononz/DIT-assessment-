@@ -368,6 +368,9 @@ def select_user():
         except ValueError:
             print("Please enter a number.")
 
+
+
+# all of the next functions are for chosing the options of the room upgrades. alot of code and fairly repetitive but i could not find a better way to do it unfortunetly
 def choose_bathroom_options(room):
 
     print("\n--- BATHROOM ---")
@@ -559,6 +562,7 @@ def choose_network_points(room, home):
     room.add_network_points(network_points)
 
 
+#creating the quote by calling all the functions up top, and then returning the quote object to be saved to a .txt file
 def create_quote():
 
     try:
@@ -625,7 +629,7 @@ def create_quote():
             return None
         raise
 
-                
+# saving the quote, just made sure it is readable and layed out reasonably
 def save_quote(quote):
 
     with open("QuoteHistory.txt", "a") as file:
@@ -691,7 +695,7 @@ def quote_finished_menu(quote):
 
 
 
-    
+#main program 
 while True:
     
     choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote, 6 = exit program :"))
