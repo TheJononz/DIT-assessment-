@@ -22,9 +22,6 @@ MIN_NETWORK_ROOMS = 2
 
 
 
-
-
-
 # in this code i make heay use of objetcs, where if i can have a peice of information as an object i do
 
 #object for all my options
