@@ -641,41 +641,41 @@ def save_quote(quote):
     with open("QuoteHistory.txt", "a") as file:
 
 
-        file.write("WAIMAK BUILD CO LTD")
-        file.write("Unit 3, 93 McKenzie Street")
-        file.write("Rangiora, North Canterbury")
-        file.write("Tel: 03 1234567")
-        file.write("Email: Office@wbc.co.nz\n")
-        file.write(f"\nQuote Number: {quote.quoteNum}")
-        file.write(f"Quote Date: {quote.quoteDate}")
-        file.write(f"Customer: {quote.user.fname} {quote.user.lname}")
-        file.write(f"Customer Address: {quote.user.address}")
-        file.write(f"Delivery Address: {quote.dAddress}")
-        file.write(f"Customer Type: {quote.user.customerType}")
-        file.write("\nROOMS\n")
+        file.write("WAIMAK BUILD CO LTD ")
+        file.write("Unit 3, 93 McKenzie Street ")
+        file.write("Rangiora, North Canterbury ")
+        file.write("Tel: 03 1234567 ")
+        file.write("Email: Office@wbc.co.nz ")
+        file.write(f"Quote Number: {quote.quoteNum} ")
+        file.write(f"Quote Date: {quote.quoteDate} ")
+        file.write(f"Customer: {quote.user.fname} {quote.user.lname} ")
+        file.write(f"Customer Address: {quote.user.address} ")
+        file.write(f"Delivery Address: {quote.dAddress} ")
+        file.write(f"Customer Type: {quote.user.customerType} ")
+        file.write("ROOMS ")
 
         for room in quote.home.rooms:
-            file.write(f"{room.name}")
+            file.write(f"{room.name} ")
 
             for option in room.options:
-                file.write(f"  {option.name}: ${option.price:,.2f}")
+                file.write(f"  {option.name}: ${option.price:,.2f} ")
 
             for socket in room.sockets:
-                file.write(f"  {socket.quantity} x {socket.socketType} sockets: ${socket.get_total():,.2f}\n")
+                file.write(f"  {socket.quantity} x {socket.socketType} sockets: ${socket.get_total():,.2f}\n" )
 
             if room.network_points is not None:
-                file.write(f"  {room.network_points.quantity} network points: ${room.network_points.get_total():,.2f}")
+                file.write(f"  {room.network_points.quantity} network points: ${room.network_points.get_total():,.2f} ")
 
-            file.write(f"  Room total: ${room.get_total():,.2f}")
+            file.write(f"  Room total: ${room.get_total():,.2f} ")
 
         if quote.home.network_switch is not None:
-            file.write(f"Network switch: ${quote.home.network_switch.price:,.2f}")
+            file.write(f"Network switch: ${quote.home.network_switch.price:,.2f} ")
 
-        file.write(f"\nDiscount rate: {quote.discountRate * 100:.0f}%")
+        file.write(f"\nDiscount rate: {quote.discountRate * 100:.0f}% ")
         file.write(f"Discount value: -${quote.discountValue:,.2f}")
-        file.write(f"Total excluding GST: ${quote.totalPriceExcGst:,.2f}")
-        file.write(f"GST: ${quote.gst:,.2f}")
-        file.write(f"Total including GST: ${quote.totalPriceIncGst:,.2f}")
+        file.write(f"Total excluding GST: ${quote.totalPriceExcGst:,.2f} ")
+        file.write(f"GST: ${quote.gst:,.2f} ")
+        file.write(f"Total including GST: ${quote.totalPriceIncGst:,.2f} ")
 
 
     print("\nQuote saved to QuoteHistory.txt.")
@@ -704,7 +704,7 @@ def quote_finished_menu(quote):
     
 while True:
     
-    choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote  "))
+    choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote, 6 = exit program :"))
 
     if choice == 1:
         new_user = create_user()
@@ -724,3 +724,8 @@ while True:
     elif choice == 5:
         quote = create_quote()
         quote_finished_menu(quote)
+    elif choice == 6:
+        print("goodbye :) ")
+        break
+    else:
+        print("invalad choice")
