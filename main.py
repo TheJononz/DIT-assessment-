@@ -100,11 +100,11 @@ class Room:
     def add_option(self, option):
         self.options.append(option)
 
-    def add_sockets(self, socket):
+    def add_socket(self, socket):
         self.sockets.append(socket)
 
-    def add_networkPoints(self, networkPoints):
-        self.network_points = networkPoints
+    def add_network_points(self, networkpoints):
+        self.network_points = networkpoints
 
     def get_socket_total(self):
         total = 0
@@ -149,7 +149,7 @@ class Room:
 
 class Tinyhome:
     def __init__(self):
-        self.basePriceIncGst = BASE_PRICE_INC_GST
+        self.base_price_inc_gst = BASE_PRICE_INC_GST
         self.rooms = [
             Room("Bathroom"),
             Room("Kitchen"),
