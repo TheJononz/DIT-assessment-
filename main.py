@@ -3,6 +3,22 @@ import json
 
 local_array_of_users = []
 
+
+class Option:
+    def __init__(self, name, price):
+        self.name = name 
+        self.price = price
+
+    def get_total(self):
+        return self.price
+
+    def get_as_dict(self):
+        return {
+            "name": self.name,
+            "price": self.price
+        }
+
+    
 class User:
     def __init__(self, fname, lname, address, customerType ):
         self.fname = fname
@@ -29,7 +45,8 @@ class Users:
         return totals
 
 class Quotes:
-    def __init__(self, quoteNum, fname, lname, address, dAddress, customerType, discountRate, totalPriceExcGst, gst, totalPriceIncGst):
+    def __init__(self, quoteNum, fname, lname, address, dAddress, customerType, discountRate, rooms, totalPriceExcGst, gst, totalPriceIncGst):
+
         self.quoteNum = quoteNum
         self.fname = fname
         self.lname = lname
@@ -37,6 +54,7 @@ class Quotes:
         self.dAddress = dAddress
         self.customerType = customerType
         self.discountRate = discountRate
+        self.rooms = rooms
         self.totalPriceExcGst = totalPriceExcGst
         self.gst = gst
         self.totalPriceIncGst = totalPriceIncGst
@@ -50,6 +68,7 @@ class Quotes:
                 "dAddress": self.dAddress,
                 "customerType": self.customerType,
                 "discountRate": self.discountRate,
+                "rooms": self.rooms,
                 "toatlPriceExcGst": self.totalPriceExcGst,
                 "gst": self.gst,
                 "totalPriceIncGst": self.totalPriceIncGst
@@ -98,6 +117,8 @@ def create_array_of_users():
     
         return new_user
 
+
+"""
 def create_array_of_quotes():
     while True:
         print("ALL USERS:")
@@ -121,7 +142,7 @@ def create_array_of_quotes():
                 print("not a valid user")
               
         dAddress = input("delivery address: ")
-
+"""
                 
 
 
