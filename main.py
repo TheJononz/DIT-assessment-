@@ -1,5 +1,5 @@
 import json
-
+from datetime import datetime
 
 local_array_of_users = []
 
@@ -319,7 +319,7 @@ def get_input(message):
 
 def create_user():
     try:
-        print("\nType C at any time to cancel.\n")
+        print("Type C at any time to cancel.")
 
         fname = get_input("First name: ")
         lname = get_input("Last name: ")
@@ -353,6 +353,33 @@ def create_user():
             print("User creation cancelled.")
             return None
         raise
+
+def select_user():
+    if len(local_array_of_users) == 0:
+        print("there are no users")
+        return None
+
+    print("CUSTOMERS")
+
+    for index, users in enumerate(local_array_of_users start=1):
+        print(f"{index}. {users.fname} {users.lname}, {users.customerType}")
+
+    while True:
+        try:
+            choice = get_input(
+                "Choose customer number: "
+            )
+            choice = int(choice)
+            if 1 <= choice <= len(local_array_of_users):
+                return local_array_of_users[choice - 1]
+            
+            print("Invalid customer number.")
+            
+        except ValueError:
+            print("Please enter a number.")
+
+
+
 
 
 """
