@@ -54,6 +54,21 @@ class Socket:
             "total": self.get_total()
         }
 
+class Network_points:
+    def __init__(self, quantity):
+        self.quantity = quantity
+        self.price = NETWORK_POINT_PRICE
+
+    def get_total(self):
+        return self.price * self.quantity
+
+    def get_as_dict(self):
+        return {
+            "quantity": self.quantity,
+            "price": self.price,
+            "total": self.get_total()
+        }
+
         
     
 class User:
