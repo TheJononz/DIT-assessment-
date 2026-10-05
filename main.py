@@ -641,17 +641,17 @@ def save_quote(quote):
     with open("QuoteHistory.txt", "a") as file:
 
 
-        file.write("WAIMAK BUILD CO LTD ")
-        file.write("Unit 3, 93 McKenzie Street ")
-        file.write("Rangiora, North Canterbury ")
-        file.write("Tel: 03 1234567 ")
-        file.write("Email: Office@wbc.co.nz ")
-        file.write(f"Quote Number: {quote.quoteNum} ")
-        file.write(f"Quote Date: {quote.quoteDate} ")
-        file.write(f"Customer: {quote.user.fname} {quote.user.lname} ")
-        file.write(f"Customer Address: {quote.user.address} ")
-        file.write(f"Delivery Address: {quote.dAddress} ")
-        file.write(f"Customer Type: {quote.user.customerType} ")
+        file.write("WAIMAK BUILD CO LTD \n")
+        file.write("Unit 3, 93 McKenzie Street \n")
+        file.write("Rangiora, North Canterbury \n")
+        file.write("Tel: 03 1234567 \n")
+        file.write("Email: Office@wbc.co.nz \n")
+        file.write(f"Quote Number: {quote.quoteNum} \n")
+        file.write(f"Quote Date: {quote.quoteDate} \n")
+        file.write(f"Customer: {quote.user.fname} {quote.user.lname} \n")
+        file.write(f"Customer Address: {quote.user.address} \n")
+        file.write(f"Delivery Address: {quote.dAddress} \n")
+        file.write(f"Customer Type: {quote.user.customerType} \n")
         file.write("ROOMS ")
 
         for room in quote.home.rooms:
@@ -669,13 +669,13 @@ def save_quote(quote):
             file.write(f"  Room total: ${room.get_total():,.2f} ")
 
         if quote.home.network_switch is not None:
-            file.write(f"Network switch: ${quote.home.network_switch.price:,.2f} ")
+            file.write(f"Network switch: ${quote.home.network_switch.price:,.2f} \n")
 
-        file.write(f"\nDiscount rate: {quote.discountRate * 100:.0f}% ")
-        file.write(f"Discount value: -${quote.discountValue:,.2f}")
-        file.write(f"Total excluding GST: ${quote.totalPriceExcGst:,.2f} ")
+        file.write(f"\nDiscount rate: {quote.discountRate * 100:.0f}% \n")
+        file.write(f"Discount value: -${quote.discountValue:,.2f}\n")
+        file.write(f"Total excluding GST: ${quote.totalPriceExcGst:,.2f} \n")
         file.write(f"GST: ${quote.gst:,.2f} ")
-        file.write(f"Total including GST: ${quote.totalPriceIncGst:,.2f} ")
+        file.write(f"Total including GST: ${quote.totalPriceIncGst:,.2f} \n")
 
 
     print("\nQuote saved to QuoteHistory.txt.")
