@@ -640,7 +640,7 @@ def save_quote(quote):
 
     with open("QuoteHistory.txt", "a") as file:
 
-
+        file.write("================================================\n")
         file.write("WAIMAK BUILD CO LTD \n")
         file.write("Unit 3, 93 McKenzie Street \n")
         file.write("Rangiora, North Canterbury \n")
@@ -655,18 +655,18 @@ def save_quote(quote):
         file.write("ROOMS ")
 
         for room in quote.home.rooms:
-            file.write(f"{room.name} ")
+            file.write(f"{room.name} \n")
 
             for option in room.options:
-                file.write(f"  {option.name}: ${option.price:,.2f} ")
+                file.write(f"  {option.name}: ${option.price:,.2f} \n")
 
             for socket in room.sockets:
                 file.write(f"  {socket.quantity} x {socket.socketType} sockets: ${socket.get_total():,.2f}\n" )
 
             if room.network_points is not None:
-                file.write(f"  {room.network_points.quantity} network points: ${room.network_points.get_total():,.2f} ")
+                file.write(f"  {room.network_points.quantity} network points: ${room.network_points.get_total():,.2f}\n ")
 
-            file.write(f"  Room total: ${room.get_total():,.2f} ")
+            file.write(f"  Room total: ${room.get_total():,.2f} \n")
 
         if quote.home.network_switch is not None:
             file.write(f"Network switch: ${quote.home.network_switch.price:,.2f} \n")
@@ -676,7 +676,7 @@ def save_quote(quote):
         file.write(f"Total excluding GST: ${quote.totalPriceExcGst:,.2f} \n")
         file.write(f"GST: ${quote.gst:,.2f} ")
         file.write(f"Total including GST: ${quote.totalPriceIncGst:,.2f} \n")
-
+        file.write("================================================\n")
 
     print("\nQuote saved to QuoteHistory.txt.")
 

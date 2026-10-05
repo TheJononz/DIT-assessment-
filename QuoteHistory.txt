@@ -1,7 +1,76 @@
-WAIMAK BUILD CO LTD Unit 3, 93 McKenzie Street Rangiora, North Canterbury Tel: 03 1234567 Email: Office@wbc.co.nz Quote Number: LUSN05102026170712 Quote Date: 05/10/2026 17:07 Customer: lukan snopovs Customer Address: 567 Delivery Address: 456 Customer Type: Retail ROOMS Bathroom   Tiles, spa bath, shower and tapware: $2,500.00   2 x 1G sockets: $80.00
-  1 network points: $50.00   Room total: $2,630.00 Kitchen   Kitchen Option B - upgraded units/worktop + induction hob: $3,500.00   2 x 2G sockets: $100.00
-  1 network points: $50.00   Room total: $3,650.00 Living Room   TV + satellite dish: $250.00   2 x 1G sockets: $80.00
-  3 network points: $150.00   Room total: $480.00 Bedroom 1   2.5KW heat pump: $1,800.00   4 x 2G sockets: $200.00
-  1 network points: $50.00   Room total: $2,050.00 Bedroom 2   2.5KW heat pump: $1,800.00   2 x 1G sockets: $80.00
-  1 network points: $50.00   Room total: $1,930.00 Network switch: $100.00 
-Discount rate: 0% Discount value: -$0.00Total excluding GST: $76,057.39 GST: $11,408.61 Total including GST: $87,466.00 
+================================================
+WAIMAK BUILD CO LTD 
+Unit 3, 93 McKenzie Street 
+Rangiora, North Canterbury 
+Tel: 03 1234567 
+Email: Office@wbc.co.nz 
+Quote Number: JOMY05102026171618 
+Quote Date: 05/10/2026 17:16 
+Customer: jonathan myall 
+Customer Address: 22344 
+Delivery Address: 1 
+Customer Type: Trade 
+ROOMS Bathroom 
+  Tiles, spa bath, shower and tapware: $2,500.00 
+  1 network points: $50.00
+   Room total: $2,550.00 
+Kitchen 
+  1 network points: $50.00
+   Room total: $50.00 
+Living Room 
+  1 network points: $50.00
+   Room total: $50.00 
+Bedroom 1 
+  1 network points: $50.00
+   Room total: $50.00 
+Bedroom 2 
+  1 network points: $50.00
+   Room total: $50.00 
+Network switch: $100.00 
+
+Discount rate: 10% 
+Discount value: -$6,806.74
+Total excluding GST: $61,260.65 
+GST: $9,189.10 Total including GST: $70,449.75 
+================================================
+================================================
+WAIMAK BUILD CO LTD 
+Unit 3, 93 McKenzie Street 
+Rangiora, North Canterbury 
+Tel: 03 1234567 
+Email: Office@wbc.co.nz 
+Quote Number: LUSN05102026171711 
+Quote Date: 05/10/2026 17:17 
+Customer: lukan snopovs 
+Customer Address: 567 
+Delivery Address: 345 
+Customer Type: Retail 
+ROOMS Bathroom 
+  2 x 2G sockets: $100.00
+  1 network points: $50.00
+   Room total: $150.00 
+Kitchen 
+  Kitchen Option B - upgraded units/worktop + induction hob: $3,500.00 
+  2 x 2G sockets: $100.00
+  2 network points: $100.00
+   Room total: $3,700.00 
+Living Room 
+  TV point + roof aerial: $250.00 
+  4 x 1G sockets: $160.00
+  1 network points: $50.00
+   Room total: $460.00 
+Bedroom 1 
+  2.5KW heat pump: $1,800.00 
+  2 x 1G sockets: $80.00
+  Room total: $1,880.00 
+Bedroom 2 
+  2.5KW heat pump: $1,800.00 
+  1 network points: $50.00
+   Room total: $1,850.00 
+Network switch: $100.00 
+
+Discount rate: 0% 
+Discount value: -$0.00
+Total excluding GST: $73,357.39 
+GST: $11,003.61 Total including GST: $84,361.00 
+================================================
