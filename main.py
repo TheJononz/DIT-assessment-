@@ -361,7 +361,7 @@ def select_user():
 
     print("CUSTOMERS")
 
-    for index, users in enumerate(local_array_of_users start=1):
+    for index, users in enumerate(local_array_of_users, start=1):
         print(f"{index}. {users.fname} {users.lname}, {users.customerType}")
 
     while True:
@@ -374,14 +374,204 @@ def select_user():
                 return local_array_of_users[choice - 1]
             
             print("Invalid customer number.")
-            
+
         except ValueError:
             print("Please enter a number.")
 
+def choose_bathroom_options(room):
 
+    print("\n--- BATHROOM ---")
+    print("1. Tiles, spa bath, shower and tapware - $2500")
+    print("2. No bathroom upgrade")
 
+    choice = get_input("Choose option: ")
 
+    if choice == "1":
+        room.add_option(
+            Option(
+                "Tiles, spa bath, shower and tapware",
+                2500
+            )
+        )
 
+    elif choice != "2":
+        print("Invalid choice.")
+        choose_bathroom_options(room)
+
+def choose_kitchen_options(room):
+
+    print("\n--- KITCHEN ---")
+    print("1. No upgrade - $0")
+    print("2. Kitchen Option A - $2000")
+    print("3. Kitchen Option B - $3500")
+    print("4. Kitchen Option C - $6000")
+
+    choice = get_input("Choose option: ")
+
+    if choice == "1":
+        pass
+    elif choice == "2":
+        room.add_option(
+            Option(
+                "Kitchen Option A - upgraded units/worktop", 2000
+            )
+        )
+    elif choice == "3":
+        room.add_option(
+            Option(
+                "Kitchen Option B - upgraded units/worktop + induction hob", 3500
+            )
+        )
+    elif choice == "4":
+        room.add_option(
+            Option(
+                "Kitchen Option C - upgraded units/worktop + Deluxe appliance pack", 6000
+            )
+        )
+    else:
+        print("Invalid choice.")
+        choose_kitchen_options(room)
+
+def choose_living_options(room):
+
+    print("\n--- LIVING ROOM ---")
+    print("1. No upgrade - $0")
+    print("2. TV point + roof aerial - $250")
+    print("3. TV + satellite dish - $250")
+    print("4. 4.5KW heat pump - $2500")
+
+    choice = get_input("Choose option: ")
+
+    if choice == "1":
+        pass
+    elif choice == "2":
+        room.add_option(
+            Option(
+                "TV point + roof aerial", 250
+            )
+        )
+    elif choice == "3":
+        room.add_option(
+            Option(
+                "TV + satellite dish", 250
+            )
+        )
+    elif choice == "4":
+        room.add_option(
+            Option(
+                "4.5KW heat pump", 2500
+            )
+        )
+    else:
+        print("Invalid choice.")
+        choose_living_options(room)
+
+def choose_bedroom_options(room):
+
+    print(f" {room.name.upper()}")
+    print("1. No upgrade - $0")
+    print("2. 2.5KW heat pump - $1800")
+
+    choice = get_input("Choose option: ")
+    if choice == "1":
+        pass
+    elif choice == "2":
+        room.add_option(
+            Option(
+                "2.5KW heat pump", 1800
+            )
+        )
+
+    else:
+        print("Invalid choice.")
+        choose_bedroom_options(room)
+
+def choose_sockets(room, home):
+
+    print(f"EXTRA SOCKETS: {room.name}")
+
+    print(f"You can have a maximum of {MAX_SOCKETS_PER_ROOM} extra sockets in this room.")
+    print("1. No extra sockets")
+    print("2. 1G sockets - $40 each")
+    print("3. 2G sockets - $50 each")
+
+    choice = get_input("Choose option: ")
+    if choice == "1":
+        return
+    if choice not in ["2", "3"]:
+        print("Invalid choice.")
+        choose_sockets(room, home)
+        return
+
+    try:
+        quantity = int(get_input("How many sockets? "))
+    except ValueError:
+
+        print("Please enter a number.")
+        choose_sockets(room, home)
+        return
+
+    if quantity < 1:
+        print("Quantity must be at least 1.")
+        choose_sockets(room, home)
+        return
+    if quantity > MAX_SOCKETS_PER_ROOM:
+        print(f"You can only have {MAX_SOCKETS_PER_ROOM} sockets in one room.")
+        choose_sockets(room, home)
+        return
+
+    current_room_sockets = room.get_socket_total()
+    if current_room_sockets + quantity > MAX_SOCKETS_PER_ROOM:
+        print("This room would have too many extra sockets.")
+        choose_sockets(room, home)
+        return
+
+    total_house_sockets = home.get_total_sockets()
+    if total_house_sockets + quantity > MAX_SOCKETS_TOTAL:
+        print(f"The whole house can only have {MAX_SOCKETS_TOTAL} extra sockets.")
+        choose_sockets(room, home)
+        return
+
+    if choice == "2":
+        socket = Socket("1G", quantity)
+    else:
+        socket = Socket("2G", quantity)
+    room.add_socket(socket)
+
+    
+def choose_network_points(room, home):
+
+    print(f"NETWORK POINTS: {room.name}")
+    print("Network points cost $50 each.")
+    print("Minimum of 2 rooms must have network points.")
+    print(f"Maximum of {MAX_NETWORK_POINTS} points total.")
+
+    choice = get_input("How many network points in this room? ")
+    try:
+        quantity = int(choice)
+    except ValueError:
+        print("Please enter a number.")
+        choose_network_points(room, home)
+        return
+
+    if quantity < 0:
+        print("Quantity cannot be negative.")
+        choose_network_points(room, home)
+        return
+    if quantity == 0:
+        return
+    
+    current_points = home.get_total_network_points()
+    if current_points + quantity > MAX_NETWORK_POINTS:
+        print(f"You can only have {MAX_NETWORK_POINTS} network points total.")
+        choose_network_points(room, home)
+        return
+
+    network_points = Networkpoints(quantity)
+
+    room.add_network_points(network_points)
+
+    
 """
 def create_array_of_quotes():
     while True:
