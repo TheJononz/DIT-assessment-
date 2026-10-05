@@ -33,6 +33,28 @@ class Option:
             "price": self.price
         }
 
+class Socket:
+    def __init__(self, socketType, quantity):
+        self.socketType = socketType
+        self.quantity = quantity
+
+        if socketType == "1G":
+            self.price = ONE_G_SOCKET_PRICE
+        elif socketType == "2G":
+            self.price = TWO_G_SOCKET_PRICE
+
+    def get_total(self):
+        return self.price * self.quantity
+
+    def get_as_dict(self):
+        return {
+            "type": self.socket_type,
+            "quantity": self.quantity,
+            "price": self.price,
+            "total": self.get_total()
+        }
+
+        
     
 class User:
     def __init__(self, fname, lname, address, customerType ):
