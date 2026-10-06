@@ -696,25 +696,27 @@ def quote_finished_menu(quote):
 while True:
     
     choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote, 6 = exit program :"))
+    try:
+        if choice == 1:
+            new_user = create_user()
+            local_array_of_users.append(new_user)
 
-    if choice == 1:
-        new_user = create_user()
-        local_array_of_users.append(new_user)
+        elif choice == 2:
+            dump_local_data()
 
-    elif choice == 2:
-        dump_local_data()
-
-    elif choice == 3:
-        remove_user()
+        elif choice == 3:
+            remove_user()
     
-    elif choice == 4:
-        diplay_all_users()
+        elif choice == 4:
+            diplay_all_users()
 
-    elif choice == 5:
-        quote = create_quote()
-        quote_finished_menu(quote)
-    elif choice == 6:
-        print("goodbye :) ")
-        break
-    else:
-        print("invalad choice")
+        elif choice == 5:
+            quote = create_quote()
+            quote_finished_menu(quote)
+        elif choice == 6:
+            print("goodbye :) ")
+            break
+        else:
+            print("invalad choice")
+    except ValueError:
+        print("please enter a number between 1 and 6")
