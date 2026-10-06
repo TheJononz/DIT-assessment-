@@ -287,7 +287,10 @@ def dump_local_data():
 #finds spesific user adn then removes them
 def remove_user():
     User = select_user()
-    local_array_of_users.remove(User)
+    if User != None:
+        local_array_of_users.remove(User)
+    else:
+        return
 
 
 #loops through array o users and displays them 
@@ -694,9 +697,9 @@ def quote_finished_menu(quote):
 
 #main program 
 while True:
-    
-    choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote, 6 = exit program :"))
     try:
+        choice = int(input("1 = create user , 2 = save data 3 = deleat user, 4 = display all users, 5 = create new quote, 6 = exit program :"))
+    
         if choice == 1:
             new_user = create_user()
             local_array_of_users.append(new_user)
